@@ -1,16 +1,25 @@
-#[derive(Debug)]
+use rand::Rng;
+
 struct Round {
     id: String,
     draws: Vec<u16>,
 } // generate_draws, get_prize, get_winners
 
-#[derive(Debug)]
+impl Round {
+    fn new() -> Self {
+        let mut rng = rand::thread_rng();
+        Self {
+            id: rng.gen::<u32>().to_string(),
+            draws: Vec::new(),
+        }
+    }
+}
+
 struct Gambler {
     id: String,
     name: String,
 }
 
-#[derive(Debug)]
 struct Bet<'round, 'gambler> {
     id: String,
     value: u32,
@@ -19,7 +28,6 @@ struct Bet<'round, 'gambler> {
     bet_type: BetType,
 }
 
-#[derive(Debug)]
 enum BetType {
     Bicho,
     Quina,
@@ -27,10 +35,7 @@ enum BetType {
 } // Default, Quina, Milhar + validacoes
 
 fn main() {
-    let round = Round {
-        id: String::from("someround"),
-        draws: Vec::new(),
-    };
+    let round = Round::new();
 
     let gambler_1 = Gambler {
         id: String::from("1"),
@@ -57,7 +62,4 @@ fn main() {
         gambler: &gambler_2,
         bet_type: BetType::Bicho,
     };
-
-    println!("{:#?}", bet_1);
-    println!("{:#?}", bet_2);
 }
