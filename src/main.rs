@@ -20,12 +20,40 @@ struct Gambler {
     name: String,
 }
 
+impl Gambler {
+    fn new(name: String) -> Self {
+        let mut rng = rand::thread_rng();
+        Self {
+            id: rng.gen::<u32>().to_string(),
+            name,
+        }
+    }
+}
+
 struct Bet<'round, 'gambler> {
     id: String,
     value: u32,
     round: &'round Round,
     gambler: &'gambler Gambler,
     bet_type: BetType,
+}
+
+impl<'roundl, 'gamblerl> Bet<'roundl, 'gamblerl> {
+    fn new(
+        value: u32,
+        round: &'roundl Round,
+        gambler: &'gamblerl Gambler,
+        bet_type: BetType,
+    ) -> Self {
+        let mut rng = rand::thread_rng();
+        Self {
+            id: rng.gen::<u32>().to_string(),
+            value,
+            round,
+            gambler,
+            bet_type,
+        }
+    }
 }
 
 enum BetType {
@@ -37,29 +65,11 @@ enum BetType {
 fn main() {
     let round = Round::new();
 
-    let gambler_1 = Gambler {
-        id: String::from("1"),
-        name: String::from("Jhon"),
-    };
+    let gambler_1 = Gambler::new(String::from("Jhon"));
 
-    let gambler_2 = Gambler {
-        id: String::from("2"),
-        name: String::from("Max"),
-    };
+    let gambler_2 = Gambler::new(String::from("Jack"));
 
-    let bet_1 = Bet {
-        id: String::from("1"),
-        value: 1000,
-        round: &round,
-        gambler: &gambler_1,
-        bet_type: BetType::Bicho,
-    };
+    let bet_1 = Bet::new(1000, &round, &gambler_1, BetType::Bicho);
 
-    let bet_2 = Bet {
-        id: String::from("2"),
-        value: 1000,
-        round: &round,
-        gambler: &gambler_2,
-        bet_type: BetType::Bicho,
-    };
+    let bet_2 = Bet::new(1000, &round, &gambler_2, BetType::Bicho);
 }
