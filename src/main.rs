@@ -1,66 +1,9 @@
-use rand::Rng;
-
-struct Round {
-    id: String,
-    draws: Vec<u16>,
-} // generate_draws, get_prize, get_winners
-
-impl Round {
-    fn new() -> Self {
-        let mut rng = rand::thread_rng();
-        Self {
-            id: rng.gen::<u32>().to_string(),
-            draws: Vec::new(),
-        }
-    }
-}
-
-struct Gambler {
-    id: String,
-    name: String,
-}
-
-impl Gambler {
-    fn new(name: String) -> Self {
-        let mut rng = rand::thread_rng();
-        Self {
-            id: rng.gen::<u32>().to_string(),
-            name,
-        }
-    }
-}
-
-struct Bet<'round, 'gambler> {
-    id: String,
-    value: u32,
-    round: &'round Round,
-    gambler: &'gambler Gambler,
-    bet_type: BetType,
-}
-
-impl<'roundl, 'gamblerl> Bet<'roundl, 'gamblerl> {
-    fn new(
-        value: u32,
-        round: &'roundl Round,
-        gambler: &'gamblerl Gambler,
-        bet_type: BetType,
-    ) -> Self {
-        let mut rng = rand::thread_rng();
-        Self {
-            id: rng.gen::<u32>().to_string(),
-            value,
-            round,
-            gambler,
-            bet_type,
-        }
-    }
-}
-
-enum BetType {
-    Bicho,
-    Quina,
-    Milhar,
-} // Default, Quina, Milhar + validacoes
+pub mod bet;
+pub mod gambler;
+pub mod round;
+use crate::bet::{Bet, BetType};
+use crate::gambler::Gambler;
+use crate::round::Round;
 
 fn main() {
     let round = Round::new();
