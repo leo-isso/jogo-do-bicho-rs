@@ -1,8 +1,8 @@
 use rand::Rng;
 
 pub struct Gambler {
-    id: String,
-    name: String,
+    pub id: String,
+    pub name: String,
 }
 
 impl Gambler {

@@ -1,8 +1,8 @@
 use rand::Rng;
 
 pub struct Round {
-    id: String,
-    draws: Vec<u16>,
+    pub draws: Vec<u16>,
+    pub id: String,
 } // generate_draws, get_prize, get_winners
 
 impl Round {

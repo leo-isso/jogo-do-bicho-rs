@@ -1,6 +1,7 @@
 pub mod bet;
 pub mod gambler;
 pub mod round;
+
 use crate::bet::{Bet, BetType};
 use crate::gambler::Gambler;
 use crate::round::Round;

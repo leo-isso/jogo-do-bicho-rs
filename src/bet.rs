@@ -9,11 +9,11 @@ pub enum BetType {
 } // Default, Quina, Milhar + validacoes
 
 pub struct Bet<'round, 'gambler> {
-    id: String,
-    value: u32,
-    round: &'round Round,
-    gambler: &'gambler Gambler,
-    bet_type: BetType,
+    pub id: String,
+    pub value: u32,
+    pub round: &'round Round,
+    pub gambler: &'gambler Gambler,
+    pub bet_type: BetType,
 }
 
 impl<'roundl, 'gamblerl> Bet<'roundl, 'gamblerl> {
