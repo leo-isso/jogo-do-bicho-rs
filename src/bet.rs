@@ -32,4 +32,16 @@ impl<'roundl, 'gamblerl> Bet<'roundl, 'gamblerl> {
             bet_type,
         }
     }
+
+    pub fn validate(&self, draws: Vec<u16>) {
+        match self.bet_type {
+            BetType::Bicho => self.validate_bicho(draws),
+            BetType::Quina => self.validate_quina(draws),
+            BetType::Milhar => self.validate_milhar(draws),            
+        }
+    }
+
+    pub fn validate_bicho(&self, draws: Vec<u16>) {}
+    pub fn validate_quina(&self, draws: Vec<u16>) {}
+    pub fn validate_milhar(&self, draws: Vec<u16>) {}
 }
