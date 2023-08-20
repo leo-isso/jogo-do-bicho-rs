@@ -1,5 +1,7 @@
 use rand::Rng;
 
+use crate::bet::Bet;
+
 pub struct Round {
     pub draws: Option<Vec<u16>>,
     pub id: String,
@@ -17,8 +19,8 @@ impl Round {
     }
 
     fn panic_if_not_ready(&self) {
-        if !self.ready {
-            panic!("Round is not ready yet!");
+        if self.draws.is_none() {
+            panic!("Round is not ready yet!")
         }
     }
 
@@ -30,5 +32,9 @@ impl Round {
         }
         self.draws = Some(draws);
         self.ready = true;
+    }
+
+    pub fn validate_results(&self, bets: Vec<Bet>) {
+        self.panic_if_not_ready();
     }
 }
