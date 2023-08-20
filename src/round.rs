@@ -21,4 +21,14 @@ impl Round {
             panic!("Round is not ready yet!");
         }
     }
+
+    pub fn draw_results(&mut self) {
+        let mut rng = rand::thread_rng();
+        let mut draws = Vec::new();
+        for _ in 0..3 {
+            draws.push(rng.gen_range(0000..9999))
+        }
+        self.draws = Some(draws);
+        self.ready = true;
+    }
 }
