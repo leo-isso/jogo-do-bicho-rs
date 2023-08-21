@@ -3,7 +3,7 @@ use rand::Rng;
 use crate::bet::Bet;
 
 pub struct Round {
-    pub draws: Vec<u16>,
+    pub draws: Vec<String>,
     pub id: String,
 } // generate_draws, get_prize, get_winners
 
@@ -19,8 +19,11 @@ impl Round {
     pub fn draw_results(&mut self) {
         let mut rng = rand::thread_rng();
         let mut draws = Vec::new();
-        for _ in 0..3 {
-            draws.push(rng.gen_range(0000..9999))
+        for _ in 0..4 {
+            let number = rng.gen_range(0000..9999);
+            draws.push(
+                String::from(format!("{:0zbefore$}", number, zbefore=4))
+            )
         }
         self.draws = draws;
     }

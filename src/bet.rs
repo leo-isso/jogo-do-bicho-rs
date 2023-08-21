@@ -31,16 +31,16 @@ impl<'gamblerl> Bet<'gamblerl> {
 
     // pub fn validate_bicho(draws: Vec<u16>) {}
     // pub fn validate_quina(draws: Vec<u16>) {}
-    fn validate_milhar(value: u16, draws: &Vec<u16>) -> bool {
+    fn validate_milhar(value: u16, draws: &Vec<String>) -> bool {
         for draw in draws {
-           if *draw == value {
+           if *draw == format!("{:0zbefore$}", value, zbefore=4) {
                return true
            }
         }
         false
     }
 
-    pub fn validate(&self, draws: &Vec<u16>) -> bool {
+    pub fn validate(&self, draws: &Vec<String>) -> bool {
         match self.bet_type {
             BetType::Bicho => panic!("not implemented yet"),
             BetType::Quina => panic!("not implemented yet"),
