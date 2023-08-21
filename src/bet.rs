@@ -1,5 +1,8 @@
-use crate::gambler::Gambler;
 use rand::Rng;
+use crate::{
+    gambler::Gambler, 
+    utils::normalize_bet_numbers
+};
 
 pub enum BetType {
     Bicho,
@@ -33,7 +36,7 @@ impl<'gamblerl> Bet<'gamblerl> {
     // pub fn validate_quina(draws: Vec<u16>) {}
     fn validate_milhar(value: u16, draws: &Vec<String>) -> bool {
         for draw in draws {
-           if *draw == format!("{:0zbefore$}", value, zbefore=4) {
+           if *draw == normalize_bet_numbers(value) {
                return true
            }
         }
