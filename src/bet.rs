@@ -5,7 +5,7 @@ use rand::Rng;
 pub enum BetType {
     Bicho,
     Quina,
-    Milhar,
+    Milhar(u16),
 } // Default, Quina, Milhar + validacoes
 
 pub struct Bet<'round, 'gambler> {
@@ -33,15 +33,22 @@ impl<'roundl, 'gamblerl> Bet<'roundl, 'gamblerl> {
         }
     }
 
-    pub fn validate(&self, draws: Vec<u16>) {
-        match self.bet_type {
-            BetType::Bicho => self.validate_bicho(draws),
-            BetType::Quina => self.validate_quina(draws),
-            BetType::Milhar => self.validate_milhar(draws),            
+    // pub fn validate_bicho(draws: Vec<u16>) {}
+    // pub fn validate_quina(draws: Vec<u16>) {}
+    fn validate_milhar(value: u16, draws: Vec<u16>) -> bool {
+        for draw in &draws {
+           if *draw == value {
+               return true
+           }
         }
+        false
     }
 
-    pub fn validate_bicho(&self, draws: Vec<u16>) {}
-    pub fn validate_quina(&self, draws: Vec<u16>) {}
-    pub fn validate_milhar(&self, draws: Vec<u16>) {}
+    pub fn validate(&self, draws: Vec<u16>) -> bool {
+        match self.bet_type {
+            BetType::Bicho => panic!("not implemented yet"),
+            BetType::Quina => panic!("not implemented yet"),
+            BetType::Milhar(value) => Bet::validate_milhar(value, draws),            
+        }
+    }
 }
