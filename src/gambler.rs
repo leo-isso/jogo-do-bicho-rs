@@ -1,6 +1,6 @@
 use rand::Rng;
 
-use crate::{bet::{Bet, BetType}, round::Round};
+use crate::bet::{Bet, BetType};
 
 pub struct Gambler {
     pub id: String,
@@ -16,12 +16,11 @@ impl Gambler {
         }
     }
 
-    pub fn place_bet<'round_lt, 'gambler_lt>(
+    pub fn place_bet<'gambler_lt>(
         &'gambler_lt self,
         value: u32,
-        round: &'round_lt Round,
         bet_type: BetType
-    ) -> Bet<'round_lt, 'gambler_lt> {
-        Bet::new(value, &round, &self, bet_type)
+    ) -> Bet<'gambler_lt> {
+        Bet::new(value, &self, bet_type)
     }
 }
